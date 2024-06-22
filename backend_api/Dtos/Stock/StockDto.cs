@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace backend_api.Dtos
+namespace backend_api.Dtos.Stock
 {   // 在C#中，get 和 set 是属性（Properties）的访问器（Accessors），用于封装类或结构中字段的访问。
     public class StockDto
     
