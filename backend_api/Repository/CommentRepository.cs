@@ -21,5 +21,16 @@ namespace backend_api.Repository
             return await _context.Comments.ToListAsync();
         }
 
+        public async Task<Comment> GetByIdAsync(int id){
+            return await _context.Comments.FindAsync(id);
+        }
+
+        public async Task<Comment> CreateAsync(Comment commentDto)
+        {
+            await _context.Comments.AddAsync(commentDto);
+            await _context.SaveChangesAsync();
+            return commentDto;
+        }
+
     }
 }

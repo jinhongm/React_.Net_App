@@ -33,5 +33,23 @@ namespace backend_api.Controllers
             var commentDto = comments.Select( s => s.ToCommentDto());
             return Ok(commentDto);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            var comment = await _commentRepository.GetByIdAsync(id);
+            if (comment == null){
+                return null;
+            }
+            return Ok(comment.ToCommentDto());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateCommentDto commentDto)
+        {
+            var commentModel = commentDto.ToCommentFromCreateDTO();
+            commentModel = await _commentRepository.CreateAsync(commentModel);
+            return CreatedAtAction(nameof(GetById), new { id = commentModel.Id }, commentModel.ToCommentDto());
+        }
     }
 }

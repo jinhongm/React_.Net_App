@@ -9,5 +9,10 @@ namespace backend_api.Interfaces
     public interface ICommentRepository 
     {
         Task<List<Comment>> GetAllAsync();
+
+        public Task<Comment?> GetByIdAsync(int id);
+
+        public Task<Comment> CreateAsync(Comment commentDto);
+
     }
 }
