@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Models;
+using backend_api.Dtos.Comment;
 
 namespace backend_api.Interfaces
 {
@@ -16,6 +17,8 @@ namespace backend_api.Interfaces
 
 
         public Task<Comment?> DeleteAsync(int id);
+
+        public Task<Comment?> UpdateAsync(int id, UpdateCommentRequestDto commentRequest);
 
     }
 }

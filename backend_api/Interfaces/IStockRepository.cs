@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Dtos.Stock;
 using backend_api.Models;
+using backend_api.Helpers;
 
 namespace backend_api.Interfaces
 {
     public interface IStockRepository
     {
-        Task<List<Stock>> GetAllAsync();
+        Task<List<Stock>> GetAllAsync(QueryObject query);
 
         
         public Task<Stock?> GetByIdAsync(int id);

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using backend_api.Data;
 using backend_api.Models;
 using backend_api.Interfaces;
+using backend_api.Dtos.Comment;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Repository
@@ -45,6 +46,15 @@ namespace backend_api.Repository
             return existing_Model;
         }
         
-        
+        public async Task<Comment?> UpdateAsync(int id, UpdateCommentRequestDto updateCommentRequestDto){
+            var commentModel = await _context.Comments.FirstOrDefaultAsync(x => x.Id == id);
+            if (commentModel == null){
+                return null;
+            }
+            commentModel.Title = updateCommentRequestDto.Title;
+            commentModel.Content = updateCommentRequestDto.Content;
+            await _context.SaveChangesAsync();
+            return commentModel;
+        }
     }
 }
