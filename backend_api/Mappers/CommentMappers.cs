@@ -21,12 +21,13 @@ namespace backend_api.Mappers
             };
         }
 
-        public static Comment ToCommentFromCreateDTO(this CreateCommentDto commentModel)
+        public static Comment ToCommentFromCreateDTO(this CreateCommentDto commentModel, int stockId)
         {
             return new Comment
             {
                 Title = commentModel.Title,
-                Content = commentModel.Content
+                Content = commentModel.Content,
+                StockId = stockId
             };
         }
     }

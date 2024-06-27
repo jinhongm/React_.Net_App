@@ -19,11 +19,13 @@ namespace backend_api.Controllers
     {
         private readonly ApplicationDBContext _context;
         private readonly ICommentRepository _commentRepository;
+        private readonly IStockRepository _stockRepo;
 
-        public CommentController(ApplicationDBContext context, ICommentRepository commentRepository)
+        public CommentController(ApplicationDBContext context, ICommentRepository commentRepository, IStockRepository stockRepo)
         {
             _context = context;
             _commentRepository = commentRepository;
+            _stockRepo = stockRepo;
         }
 
         [HttpGet]
@@ -44,12 +46,26 @@ namespace backend_api.Controllers
             return Ok(comment.ToCommentDto());
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateCommentDto commentDto)
+        [HttpPost("{stockId}")]
+        public async Task<IActionResult> Create([FromRoute] int stockId, [FromBody] CreateCommentDto commentDto)
         {
-            var commentModel = commentDto.ToCommentFromCreateDTO();
+            
+            if (!await _stockRepo.StockExists(stockId)) {
+                return BadRequest("Stock Does Not Exist!");
+            }
+            var commentModel = commentDto.ToCommentFromCreateDTO(stockId);
             commentModel = await _commentRepository.CreateAsync(commentModel);
             return CreatedAtAction(nameof(GetById), new { id = commentModel.Id }, commentModel.ToCommentDto());
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var commentModel = await _commentRepository.DeleteAsync(id);
+            if (commentModel == null) {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }

@@ -25,12 +25,26 @@ namespace backend_api.Repository
             return await _context.Comments.FindAsync(id);
         }
 
-        public async Task<Comment> CreateAsync(Comment commentDto)
+        public async Task<Comment> CreateAsync(Comment commentModel)
         {
-            await _context.Comments.AddAsync(commentDto);
+            await _context.Comments.AddAsync(commentModel);
             await _context.SaveChangesAsync();
-            return commentDto;
+            return commentModel;
         }
 
+        public async Task<Comment?> DeleteAsync(int id)
+        {
+            var existing_Model = await _context.Comments.FirstOrDefaultAsync( x => x.Id == id);
+            if (existing_Model == null)
+            {
+                return null;
+            }
+
+            _context.Comments.Remove(existing_Model);
+            await _context.SaveChangesAsync();
+            return existing_Model;
+        }
+        
+        
     }
 }

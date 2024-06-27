@@ -12,7 +12,10 @@ namespace backend_api.Interfaces
 
         public Task<Comment?> GetByIdAsync(int id);
 
-        public Task<Comment> CreateAsync(Comment commentDto);
+        public Task<Comment> CreateAsync(Comment commentModel);
+
+
+        public Task<Comment?> DeleteAsync(int id);
 
     }
 }

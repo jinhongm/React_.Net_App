@@ -20,5 +20,7 @@ namespace backend_api.Interfaces
         public Task<Stock?> UpdateAsync(int id, UpdateStockRequestDto stockDto);
 
         public Task<Stock?> DeleteAsync(int id);
+
+        public Task<bool> StockExists(int id);
     }
 }
