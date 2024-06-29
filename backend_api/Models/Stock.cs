@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace backend_api.Models
 {   // 在C#中，get 和 set 是属性（Properties）的访问器（Accessors），用于封装类或结构中字段的访问。
+    [Table("Stocks")]
     public class Stock
     {
         // 这是Stock类的主键。在数据库中，它通常会被设置为自动增长的标识列，用于唯一标识每条记录。
@@ -30,5 +31,7 @@ namespace backend_api.Models
         public long MarketCap { get; set; }
 
         public List<Comment> Comments { get; set; } = new List<Comment>();
+
+        public List<Portfolio> Portfolios = new List<Portfolio>();
     }
 }
