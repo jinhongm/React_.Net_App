@@ -32,7 +32,7 @@ namespace backend_api.Repository
                 queryable = queryable.Where(s => s.Symbol.Contains(query.Symbol));
             }
 
-                // 确保query.SortBy不为空，并且检查是否是按Symbol排序
+            // 确保query.SortBy不为空，并且检查是否是按Symbol排序
             if (!string.IsNullOrWhiteSpace(query.SortBy) && query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
             {
                     // 根据isDescending布尔值决定使用OrderBy还是OrderByDescending
