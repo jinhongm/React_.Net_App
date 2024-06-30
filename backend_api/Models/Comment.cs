@@ -18,6 +18,7 @@ namespace backend_api.Models
         // Navigation Property
         // 这是一个导航属性，它允许在实体框架（Entity Framework）中直接通过 Comment 实例访问相关联的 Stock 实例。
         public Stock? Stock { get; set; }
-
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }
