@@ -11,7 +11,8 @@ namespace backend_api.Interfaces
     public interface IStockRepository
     {
         Task<List<Stock>> GetAllAsync(QueryObject query);
-
+        
+        Task<Stock?> GetBySymbolAsync(string symbol);
         
         public Task<Stock?> GetByIdAsync(int id);
 
