@@ -21,7 +21,7 @@ namespace backend_api.Repository
         // 这里使用了 .Include(c => c.Comments) 来加载 Stock 实体关联的 Comments 导航属性。因为 FindAsync 不支持 .Include，所以你不能使用 FindAsync 来实现相同的效果。如果你尝试使用 FindAsync 加载导航属性，你会发现它无法做到，因为 FindAsync 只能加载实体本身而不加载其关联的导航属性。
         public async Task<List<Stock>> GetAllAsync(QueryObject query)
         {
-            IQueryable<Stock> queryable = _context.Stocks.Include(c => c.Comments);
+            IQueryable<Stock> queryable = _context.Stocks.Include(c => c.Comments).ThenInclude(a => a.AppUser);
 
             if (!string.IsNullOrWhiteSpace(query.CompanyName))
             {
